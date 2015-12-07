@@ -1,0 +1,1099 @@
+/* Not part of Normalize's CSS for some reason. */
+p {
+    margin: 0;
+}
+ul {
+    list-style: none;
+    padding: 0;
+}
+/* END - Not part of Normalize's CSS for some reason. */
+
+
+
+/* Metallic button styling (for logged-in mode only). */
+body.loggedin button,
+body.loggedin a.button {
+    border: 2px solid gray;
+    border-left-color: rgb(192, 192, 192);
+    border-top-color: rgb(192, 192, 192);
+    font-size: 14px;
+    line-height: 17px;
+    text-decoration: none;
+    text-shadow: rgba(102, 102, 102, 0.5) 0 -1px 0, rgba(255, 255, 255, 0.6) 0 1px 1px;
+    padding: 2px 6px 3px 6px;
+    color: black;
+
+    /* Override monospace font in display. */
+    font-family: 'Lucida Grande', sans-serif;
+
+    /* Without display:inline-block, padding changes for active anchor buttons
+       don't take effect. */
+    display: inline-block;
+
+    /* Pattern */
+    background: repeating-linear-gradient(-45deg, gray, white, gray);
+    background: -moz-repeating-linear-gradient(top left -45deg, gray, white, gray);
+    background: -ms-repeating-linear-gradient(top left -45deg, gray, white, gray);
+    background: -o-repeating-linear-gradient(top left -45deg, gray, white, gray);
+    background: -webkit-repeating-linear-gradient(-45deg, gray, white, gray);
+}
+body.loggedin button:active,
+body.loggedin button.active,
+body.loggedin a:active.button {
+    border-color: rgb(192, 192, 192);
+    border-left-color: gray;
+    border-top-color: gray;
+    padding: 3px 5px 2px 7px;
+}
+body.loggedin button[disabled],
+body.loggedin a[disabled].button,
+body.loggedin button[disabled]:active,
+body.loggedin button[disabled].active,
+body.loggedin a[disabled]:active.button {
+    color: gray;
+    cursor: default;
+    border-color: gray;
+    border-left-color: rgb(192, 192, 192);
+    border-top-color: rgb(192, 192, 192);
+    text-shadow: rgba(102, 102, 102, 0.5) 0 0px 0, rgba(255, 255, 255, 0.6) 0 1px 1px;
+    padding: 2px 6px 3px 6px;
+}
+
+
+
+/* Legacy browser instructions. */
+noscript p,
+#outdated {
+    background: yellow;
+    border: 3px solid red;
+    padding: 1em;
+    color: red;
+    text-align: center;
+    margin: 2em 0;
+}
+/* Assume modern browser. */
+#outdated {
+    display: none;
+}
+
+
+
+/* Only show init message if there's a delay making initial request. */
+#init {
+    display: none;
+}
+
+
+
+/* Assume user is not logged in. */
+header,   /* Initially hidden to help transition from white to back bg if */
+footer,   /* user is already logged in on page reload. */
+.environment-list {
+    display: none;
+}
+
+
+
+/* Styles for switchClass animation between logged out and logged in state. */
+.loggedin {
+    background-color: black;
+    color: white;
+}
+.loggedin header {
+    width: 100%;
+    height: 36px;   /* Measured on Chrome. */
+    display: block;
+}
+.loggedin #logo {
+    float: left;
+}
+.loggedin #session #logout {
+    display: block;
+}
+.loggedin #session #login {
+    display: none;
+}
+.loggedin #controls {
+    display: block;
+}
+.loggedin .environment-list {
+    display: block;
+}
+.loggedin footer {
+    display: block;
+}
+.loggedout {
+    background-color: white;
+    color: black;
+}
+.loggedout header {
+    position: relative;
+    background-color: black;
+    display: block;
+}
+.loggedout #session {
+    background-color: white;
+}
+.loggedout #session #logout {
+    display: none;
+}
+.loggedout #session #login {
+    display: block;
+}
+.loggedout #controls {
+    display: none;
+}
+.loggedout footer {
+    display: block;
+}
+/* Once initialization is done, never show the init msg again. */
+.loggedin #init,
+.loggedout #init {
+    display: none;
+}
+
+
+
+/* Login control styling. */
+#session #login {
+    margin: 0em auto;
+    padding: 2em 0;
+    position: relative;
+}
+#session #login label,
+#session #login input {
+    display: block;
+    margin: 0 2em 0.25em 2em;
+}
+#session #login input {
+    border: 2px solid gray;
+    margin-bottom: 1em;
+    width: 475px;
+}
+#session #login input.error {
+    border-color: red;
+}
+#session #login button {
+    margin: 2em 2em 0.25em 2em;
+}
+#session #login p {
+    color: red;
+    display: none;
+    position: absolute;
+    left: 2em;
+}
+
+
+
+/* For the environment list container to take on the height of the browser
+   window, html and body need to have 100% height. */
+html,
+body.loggedin {
+    /* When html,body height = 100%, adding margin top/bottom adds scrollbar. */
+    height: 98%;
+}
+
+body {
+    /* When html,body height = 100%, adding margin top/bottom adds scrollbar. */
+    margin: 2em;
+    font-family: 'Lucida Grande', sans-serif;
+    white-space: nowrap;   /* Helps when browser windows is resized. */
+}
+
+header {
+    position: relative;
+    min-width: 550px;
+    width: 50%;
+    margin: 1em auto 0;
+    border: 2px solid black;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    border-left-width: 3px;
+    border-right-width: 3px;
+}
+#logo {
+    border-bottom: 2px solid black;
+}
+header .brand {
+    background-color: black;
+    color: white;
+}
+header .brand,
+header .product {
+    border: 1px solid white;
+    padding: 0.125em;
+    font-family: serif;
+    font-size: 1.5em;
+    line-height: 1.5em;
+}
+header .brand {
+    letter-spacing: 0.125em;
+    padding-left: 0.25em;
+    border-radius: 5px 0 0 5px;
+}
+header .product {
+    background-color: white;
+    color: black;
+    border-radius: 0 5px 5px 0;
+}
+#session #logout {
+    float: right;
+    position: relative;
+    top: 5px;
+    right: 6px;
+    color: gray;
+}
+
+/* Keep UI simple; don't display username. */
+#session #logout span {
+    display: none;
+}
+/*
+#session #logout button {
+    margin-left: 0.5em;
+}
+*/
+
+#controls {
+    float: right;
+    color: gray;
+    padding-top: 5px;
+    margin-right: 5em;
+}
+#controls > * {
+    margin-left: 5em;
+}
+
+#session #logout > *,
+#controls > * {
+    /* Without float, clicking on a header.button moves the rest of the content 
+       down a pixel. */
+    float: left;
+}
+#session #logout span,
+#controls span {
+    margin-top: 5px;
+    font-size: 14px;
+    line-height: 14px;
+}
+#session #logout span {
+    margin-top: 6px;
+}
+
+#controls #filterEnvironments {
+    margin-top: 1px;
+}
+
+.environment-list {
+    margin: 2em 0 1em;
+    background-color: #111;
+    border: 3px solid #222;
+    min-height: 85%;
+    box-shadow: 5px 3px 40px 5px rgba(200, 200, 200, 0.25),
+                inset 0 -30px 40px 0 rgba(122, 60, 45, 0.25);   /* The light wood color. */
+
+    /* Cannot set overflow here otherwise sortable() won't work right. */
+    /*overflow: auto;*/
+}
+
+.unexpected-error,
+.logout-error,
+.fetch-environments-error {
+   text-align: center;
+   margin-top: 7em;
+}
+
+.environment {
+    border: 3px solid rgba(122, 60, 45, 0.1);   /* The light wood color (at lower opacity than .environment-list border). */
+    border-bottom-width: 6px;
+
+    /* Cannot set display:none here otherwise sortable() won't work right. */
+    /*display: none;*/
+}
+
+/* Wood panel */
+.environment .wood {
+    /* http://borysses.deviantart.com/art/Wood-uncut-95473003 */
+    background: url("../img/wood.jpg") repeat scroll 0px 0px transparent;
+    padding-top: 14px;
+
+    /* 3D transition between editor and non-editor front. */
+    /* http://css3.bradshawenterprises.com/flip/ */
+    perspective: 1100px;
+    -moz-perspective: 1100px;
+    -ms-perspective: 1100px;
+    -o-perspective: 1100px;
+    -webkit-perspective: 1100px;
+}
+
+
+
+/* Handles */
+.environment .handle {
+    /* http://www.gefen.com/kvm/gef-mod-16416.jsp?prod_id=11030 */
+    background: url("../img/handles.png") no-repeat scroll 0px -8px transparent;
+    width: 29px;
+    height: 260px;
+}
+.environment .handle.left {
+    border-right: 1px solid black;
+    float: left;
+}
+.environment .handle.right {
+    background-position: -32px -8px;
+    float: right;
+    border-left: 1px solid black;
+    width: 28px;
+}
+
+/* Drag affordance */
+.environment .handle {
+    cursor: move;   /* Fallback for older browsers. */
+    cursor: -moz-grab;
+    cursor: -webkit-grab;
+}
+.environment.ui-sortable-helper .handle {
+    cursor: -moz-grabbing;
+    cursor: -webkit-grabbing;
+}
+
+
+
+.environment .content {
+    height: 260px;
+    margin: 0 28px 0 29px;
+    background: #222;
+
+    /* Gradient */
+    background: linear-gradient(to bottom, #222, #000);
+    background: -moz-linear-gradient(top, #222, #000);
+    background: -ms-linear-gradient(top, #222, #000);
+    background: -o-linear-gradient(top, #222, #000);
+    background: -webkit-linear-gradient(top, #222, #000);
+
+    /* 3D transition between editor and non-editor front. */
+    /* http://css3.bradshawenterprises.com/flip/ */
+    transform-style: preserve-3d;
+    transition: all 0.25s linear;
+    -moz-transform-style: preserve-3d;
+    -moz-transition: all 0.25s linear;
+    -ms-transform-style: preserve-3d;
+    -ms-transition: all 0.25s linear;
+    -o-transform-style: preserve-3d;
+    -o-transition: all 0.25s linear;
+    -webkit-transform-style: preserve-3d;
+    -webkit-transition: all 0.25s linear;
+}
+/* 3D transition between editor and non-editor front. */
+/* http://css3.bradshawenterprises.com/flip/ */
+.environment.rotate .content {
+    /* Make display go towards the user (so they can read better). */
+    transform: rotateX(-90deg);
+    -moz-transform: rotateX(-90deg);
+    -ms-transform: rotateX(-90deg);
+    -o-transform: rotateX(-90deg);
+    -webkit-transform: rotateX(-90deg);
+}
+.environment.rotate-cancel-transition .content {
+    transition: none;
+    -moz-transition: none;
+    -ms-transition: none;
+    -o-transition: none;
+    -webkit-transition: none;
+}
+.environment.rotate.rotate-flip .content {
+    transform: rotateX(-270deg);
+    -moz-transform: rotateX(-270deg);
+    -ms-transform: rotateX(-270deg);
+    -o-transform: rotateX(-270deg);
+    -webkit-transform: rotateX(-270deg);
+}
+.environment.rotate.rotate-flip.rotate-more .content {
+    transform: rotateX(-360deg);
+    -moz-transform: rotateX(-360deg);
+    -ms-transform: rotateX(-360deg);
+    -o-transform: rotateX(-360deg);
+    -webkit-transform: rotateX(-360deg);
+}
+
+.left-col {
+    float: left;
+    /* Note: width may be overridden for certain resolutions; see end of this file. */
+    width: 56%;
+    height: inherit;
+}
+
+.environment .content .controls {
+    float: left;
+    width: 112px;
+    height: inherit;
+    position: relative;
+    margin: 18px auto;   /* For pushing content down. */
+    padding: 0 9px;   /* So that it's equally far from the handle as .display is. */
+}
+.environment .content .controls .light {
+    width: 24px;
+    height: 24px;
+    margin: 0 auto;
+
+    /* Metallic border */
+    border-radius: 15px;
+    border: 3px solid #999;
+    border-top-color: #ddd;
+    border-bottom-color: #666;
+
+    /* Gradient */
+    background: radial-gradient(#600 35%, #a00 60%, #000 75%);
+    background: -moz-radial-gradient(#600 35%, #a00 60%, #000 75%);
+    background: -ms-radial-gradient(#600 35%, #a00 60%, #000 75%);
+    background: -o-radial-gradient(#600 35%, #a00 60%, #000 75%);
+    background: -webkit-radial-gradient(#600 35%, #a00 60%, #000 75%);
+}
+.environment.on .content .controls .light {
+    background: radial-gradient(#dd0 35%, #c00 60%, #000 80%);
+    background: -moz-radial-gradient(#dd0 35%, #c00 60%, #000 80%);
+    background: -ms-radial-gradient(#dd0 35%, #c00 60%, #000 80%);
+    background: -o-radial-gradient(#dd0 35%, #c00 60%, #000 80%);
+    background: -webkit-radial-gradient(#dd0 35%, #c00 60%, #000 80%);
+}
+
+
+
+/* Switch. */
+.environment.global .content .controls .switch {
+    display: none;
+}
+.environment .content .controls .switch {
+    text-align: center;
+    font-size: 0.5em;
+    line-height: 0.5em;
+    margin: 14px auto 21px;
+    color: white;
+}
+.environment .content .controls .switch .hole {
+    cursor: pointer;
+    width: 24px;
+    height: 24px;
+    margin: 1.75em auto;
+
+    /* Metallic border */
+    border-radius: 15px;
+    border: 3px solid #999;
+    border-top-color: #ddd;
+    border-bottom-color: #666;
+
+    /* Gradient */
+    background: radial-gradient(#000 25%, #888 60%, #000 75%);
+    background: -moz-radial-gradient(#000 25%, #888 60%, #000 75%);
+    background: -ms-radial-gradient(#000 25%, #888 60%, #000 75%);
+    background: -o-radial-gradient(#000 25%, #888 60%, #000 75%);
+    background: -webkit-radial-gradient(#000 25%, #888 60%, #000 75%);
+}
+.environment .content .controls .switch .base {
+    border-radius: 10px;
+    bottom: -8px;
+    box-shadow: -3px 0 5px -1px #000;
+    height: 20px;
+    left: 7px;
+    position: relative;
+    width: 10px;
+
+    background: linear-gradient(to right, #111, #333, #eee, #000);
+    background: -moz-linear-gradient(left, #111, #333, #eee, #000);
+    background: -ms-linear-gradient(left, #111, #333, #eee, #000);
+    background: -o-linear-gradient(left, #111, #333, #eee, #000);
+    background: -webkit-linear-gradient(left, #111, #333, #eee, #000);
+}
+.environment .content .controls .switch .tip {
+    width: 16px;
+    height: 16px;
+    border-radius: 10px;
+    background-color: white;
+    position: relative;
+    left: 4px;
+    bottom: 5px;
+    box-shadow: inset 2px -2px 3px 3px #222;
+}
+.environment.on .content .controls .switch .base {
+    bottom: 4px;
+}
+.environment.on .content .controls .switch .tip {
+    bottom: 27px;
+}
+.environment.predestroy .content .controls .switch {
+    /* Display:none will move destroy button, so use visibility:hidden. */
+    visibility: hidden;
+}
+
+
+
+/* Edit button */
+.environment .content .controls .edit {
+    display: block;
+    margin: 1.5em auto 0;
+}
+.environment .content .controls .edit[disabled],
+.environment.global.edit .content .controls .edit {
+    display: none;
+}
+
+
+
+/* Safety button */
+.environment.global .content .controls .safety {
+    display: none;
+}
+.environment .content .controls .safety {
+    position: relative;   /* So that margin: 0 auto; still centers this element. */
+    margin: 0 12px;
+    height: 36px;
+    border: 2px solid #333;
+    border-top-width: 0;
+    border-bottom-width: 0;
+    padding-top: 50px;   /* The slider rail. */
+}
+.environment .content .controls .safety.safe {
+    cursor: default;
+}
+.environment .content .controls .safety .border {
+    width: inherit;
+    height: inherit;
+    border: 9px solid #bb0;
+    margin: -9px;
+    position: relative;   /* So that the safety can be animated up and down. */
+}
+.environment .content .controls .safety .destroy {
+    bottom: 5px;
+    left: 8px;
+    position: absolute;
+}
+.environment .content .controls .safety .protection {
+    cursor: pointer;
+    width: inherit;
+    height: inherit;
+    border: 2px solid black;
+    margin: -2px;
+    opacity: 0.5;
+
+    /* Pattern */
+    background: repeating-linear-gradient(-45deg, transparent, transparent 10px, yellow 10px, yellow 19px);
+    background: -moz-repeating-linear-gradient(top left -45deg, transparent, transparent 10px, yellow 10px, yellow 19px);
+    background: -ms-repeating-linear-gradient(top left -45deg, transparent, transparent 10px, yellow 10px, yellow 19px);
+    background: -o-repeating-linear-gradient(top left -45deg, transparent, transparent 10px, yellow 10px, yellow 19px);
+    background: -webkit-repeating-linear-gradient(-45deg, transparent, transparent 10px, yellow 10px, yellow 19px);
+}
+
+
+
+.right-col {
+    float: right;
+    height: inherit;
+    /* Note: width may be overridden for certain resolutions; see at EOF. */
+    width: 43.5%;   /* TODO: why doesn't 44% work? It works in try.html! */
+}
+.environment.edit .right-col {
+    display: none;
+}
+.environment.edit .left-col {
+    width: 89%;
+}
+
+/* Display */
+.environment .content .display {
+    background-color: #222;
+    border: 4px solid black;
+    height: 206px;   /* Using "inherit" would be too large... since height is static, this is ok. */
+    /*width: 100%;*/   /* DO NOT SET THIS! or else the content will go beyond the right edge. */
+    margin: 12px;
+    color: #222;
+    font-family: monospace;
+    font-size: 1.125em;
+    line-height: 1.125em;
+    padding: 0.75em;
+    box-shadow: inset 1px 1px 10px 1px rgba(0, 0, 0, .75);
+    overflow: hidden;
+
+    /* jQuery UI resizable adds left property when dragging; prevent that. */
+    /* TODO: remove if dedicated expand button is used. */
+    right: 0 !important;
+}
+/* jQuery UI resizable positions south-facing handles below element, causing
+   scrollbars when overflow == auto. */
+/* TODO: remove if dedicated expand button is used. */
+.environment .content .display .ui-resizable-s,
+.environment .content .display .ui-resizable-sw {
+    bottom: 0;
+}
+.environment .content .display p {
+    margin-top: 0.5em;
+}
+.environment .content .display p:first-of-type {
+    margin-top: 0;
+}
+.environment .content .display p.vip-instruction {
+    margin: 0.25em 0 0.75em 3.65em;
+    font-size: smaller;
+}
+.environment .content .display input {
+    width: 260px;
+
+    /* Style the input field as regular text. */
+    background-color: inherit;
+    border: 0;
+    color: inherit;
+    outline: none;
+    cursor: default;
+}
+.environment .content .display button {
+    float: right;
+    font-size: 12px;
+    line-height: 15px;
+    position: relative;
+    bottom: 2px;
+}
+.environment .content .display ul {
+    list-style-type: disc;
+    margin: 1em 0 1em 1em;
+}
+.environment .content .display ul > li {
+    margin-left: 0.25em;
+}
+.environment .content .display ul a {
+    color: yellow;
+}
+.environment .content .display ul li ul {
+    margin-top: 0;
+}
+.environment .content .display h5 {
+    margin: 0 0 0.75em 0;
+    font-size: 1em;
+    line-height: 1em;
+    font-weight: normal;
+    text-align: center;
+    border-bottom: 1px solid #222;
+    padding-bottom: 0.25em;
+}
+.environment .content .display .launch {
+    text-align: center;
+}
+.environment .content .display .launch .button {
+    position: relative;
+    top: 2em;
+}
+/* Regardless of environment being on or off, if display is on, a message needs
+   to be displayed. */
+.environment .content .display.on {
+    background-color: #00c;
+}
+.environment.on .content .display,
+/* Regardless of environment being on or off, if display is on, a message needs
+   to be displayed. */
+.environment.off .content .display.on,
+.environment.new .content .display,
+.environment.edit .content .display,
+.environment.shutdown .content .display {
+    overflow: auto;
+    color: white;
+}
+.environment.on .content .display h5,
+/* Regardless of environment being on or off, if display is on, a message needs
+   to be displayed. */
+.environment.off .content .display.on h5,
+.environment.new .content .display h5,
+.environment.edit .content .display h5,
+.environment.shutdown .content .display h5 {
+    border-color: white;
+}
+.environment.shutdown .content .display {
+    background-color: #ddd;
+}
+.environment.test .content .display {
+    /* "Hide" text until test phase is complete. */
+    color: #00c;
+}
+
+
+
+.environment .content form,
+.environment .content .details {
+    height: 234px;
+    margin-left: 130px;   /* Same as .controls' width + 2 * it's padding. */
+    padding: 0 2em;
+    margin-top: 12px;
+}
+.environment .content .details .name {
+    font-size: 1.2em;
+    line-height: 1.2em;
+    padding: 8px 0 12px 0;
+}
+
+
+
+/* Services list */
+.environment .content .details .service-list {
+    padding: 0.75em 0 7px;   /* Pushes the scrollbar, if any, to the bottom. */
+                             /* Note: these are FF settings; Chrome puts the
+                                scrollbar higher. */
+    position: relative;
+    bottom: 0;
+
+    /* Overflow */
+    overflow-x: auto;
+    overflow-y: hidden;
+
+    /* Undo accounting for .slot.active's shadow. */
+    margin-left: -6px;
+}
+
+/* One service */
+.environment .content .details .service-list .slot {
+    background: #444;
+    border: 3px solid black;
+    width: 20px;   /* Same as .front-panel's height. */
+    height: 154px;
+    display: inline-block;   /* Float: left does not work w/ overflow! */
+    margin-right: 23px;
+    margin-left: 6px;   /* Account for .slot.active's shadow. */
+}
+.environment .content .details .service-list .slot:last-child {
+    margin-right: 0;
+}
+.environment .content .details .service-list .slot .perspective {
+    border: 2px solid black;
+    border-right-width: 0;
+    width: 13px;
+    height: 150px;   /* .slot's height - 2 * .perspective's border-width */
+
+    /* Perspective */
+    transform: perspective(75px) rotateY(-40deg);
+    transform-origin: 25% 50%;
+    -webkit-transform: perspective(75px) rotateY(-40deg);
+    -webkit-transform-origin: 25% 50%;
+    -moz-transform: perspective(75px) rotateY(-40deg);
+    -moz-transform-origin: 25% 50%;
+    -ms-transform: perspective(75px) rotateY(-40deg);
+    -ms-transform-origin: 25% 50%;
+    -o-transform: perspective(75px) rotateY(-40deg);
+    -o-transform-origin: 25% 50%;
+
+    /* Gradient */
+    background: linear-gradient(to right, #111, #444);
+    background: -moz-linear-gradient(left, #111, #444);
+    background: -ms-linear-gradient(left, #111, #444);
+    background: -o-linear-gradient(left, #111, #444);
+    background: -webkit-linear-gradient(left, #111, #444);
+}
+.environment .content .details .service-list .slot .front-panel {
+    border: 2px solid black;
+    border-radius: 5px;
+    width: 162px;
+    height: 20px;   /* Same as .slot's width. */
+    position: relative;
+    bottom: 94px;
+    right: 58px;
+    display: table;
+    padding: 5px;
+
+    /* Vertical text */
+    transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    -webkit-transform: rotate(90deg);
+
+    /* Gradient */
+    background: linear-gradient(to top, #111, #444);
+    background: -moz-linear-gradient(bottom, #111, #444);
+    background: -ms-linear-gradient(bottom, #111, #444);
+    background: -o-linear-gradient(bottom, #111, #444);
+    background: -webkit-linear-gradient(bottom, #111, #444);
+}
+.environment .content .details .service-list .slot .light {
+    display: table-cell;
+    width: 20px;
+
+    /* Gradient: see next rule. */
+}
+.environment .content .details .service-list .slot .light,
+.environment.off .content .details .service-list .slot.up .light,
+.environment.off .content .details .service-list .slot.down .light,
+.environment.off .content .details .service-list .slot.booting.blink-on .light,
+.environment .content .details .service-list .slot.booting.blink-off .light {
+    background: radial-gradient(black 10%, rgb(53,53,53) 30%, transparent 60%);
+    background: -moz-radial-gradient(black 10%, rgb(53,53,53) 30%, transparent 60%);
+    background: -ms-radial-gradient(black 10%, rgb(53,53,53) 30%, transparent 60%);
+    background: -o-radial-gradient(black 10%, rgb(53,53,53) 30%, transparent 60%);
+    background: -webkit-radial-gradient(black 10%, rgb(53,53,53) 30%, transparent 60%);
+}
+.environment .content .details .service-list .slot.booting.blink-on .light {
+    background: radial-gradient(black 10%, #ff7e00 30%, transparent 60%);
+    background: -moz-radial-gradient(black 10%, #ff7e00 30%, transparent 60%);
+    background: -ms-radial-gradient(black 10%, #ff7e00 30%, transparent 60%);
+    background: -o-radial-gradient(black 10%, #ff7e00 30%, transparent 60%);
+    background: -webkit-radial-gradient(black 10%, #ff7e00 30%, transparent 60%);
+}
+.environment .content .details .service-list .slot.up .light {
+    background: radial-gradient(black 10%, #0c0 30%, transparent 60%);
+    background: -moz-radial-gradient(black 10%, #0c0 30%, transparent 60%);
+    background: -ms-radial-gradient(black 10%, #0c0 30%, transparent 60%);
+    background: -o-radial-gradient(black 10%, #0c0 30%, transparent 60%);
+    background: -webkit-radial-gradient(black 10%, #0c0 30%, transparent 60%);
+}
+.environment .content .details .service-list .slot.down .light {
+    background: radial-gradient(black 10%, #d00 30%, transparent 60%);
+    background: -moz-radial-gradient(black 10%, #d00 30%, transparent 60%);
+    background: -ms-radial-gradient(black 10%, #d00 30%, transparent 60%);
+    background: -o-radial-gradient(black 10%, #d00 30%, transparent 60%);
+    background: -webkit-radial-gradient(black 10%, #d00 30%, transparent 60%);
+}
+.environment.test .content .details .service-list .slot .light,
+.environment.test .content .details .service-list .slot.booting.blink-on .light,
+.environment.test .content .details .service-list .slot.booting.blink-off .light {
+    background: radial-gradient(black 10%, yellow 30%, transparent 60%);
+    background: -moz-radial-gradient(black 10%, yellow 30%, transparent 60%);
+    background: -ms-radial-gradient(black 10%, yellow 30%, transparent 60%);
+    background: -o-radial-gradient(black 10%, yellow 30%, transparent 60%);
+    background: -webkit-radial-gradient(black 10%, yellow 30%, transparent 60%);
+}
+.environment .content .details .service-list .slot .text {
+    display: table-cell;
+    vertical-align: middle;
+    padding-left: 1em;
+}
+.environment .content .details .service-list .slot .text,
+.environment .content .details .service-list .slot.down.booting .text {
+    color: #ddd;
+}
+.environment .content .details .service-list .slot.down .text {
+    color: #e00;
+}
+.environment.off .content .details .service-list .slot .text {
+    color: #555;
+}
+.environment .content .details .service-list .slot .controls {
+    /* Undo .environment .content .controls styling. */
+    float: none;
+    width: 35%;
+
+    display: none;   /* Don't show initially. */
+    vertical-align: middle;
+    text-align: center;
+    border: 1px solid gray;
+
+    /* TODO: remove once imgs are used; this is needed else FF size is too big. */
+    font-size: 14px;
+    line-height: 14px;
+    height: 14px;
+}
+.environment .content .details .service-list .slot .controls:hover {
+    background: black;
+
+    transform: rotate(-90deg);
+    transition: all 0.25s linear;
+    -moz-transform: rotate(-90deg);
+    -moz-transition: all 0.25s linear;
+    -ms-transform: rotate(-90deg);
+    -ms-transition: all 0.25s linear;
+    -o-transform: rotate(-90deg);
+    -o-transition: all 0.25s linear;
+    -webkit-transform: rotate(-90deg);
+    -webkit-transition: all 0.25s linear;
+}
+
+/* Service select effects. */
+.environment.on .content .details .service-list .slot {
+    cursor: pointer;
+}
+.environment.on .content .details .service-list .slot.prevent-click {
+    cursor: default;
+}
+.environment .content .details .service-list .slot.up.active {
+    background-color: #090;
+    box-shadow: 0px 0px 10px 0px rgba(0, 200, 0, 0.75);
+}
+.environment .content .details .service-list .slot.down.active {
+    background-color: #a00;
+    box-shadow: 0px 0px 10px 0px rgba(200, 0, 0, 0.75);
+}
+.environment .content .details .service-list .slot.booting.up.active,
+.environment .content .details .service-list .slot.booting.down.active {
+    background-color: #bb5a00;
+    box-shadow: 0px 0px 10px 0px rgba(200, 100, 0, 0.75);
+}
+.environment .content .details .service-list .slot.up.active .perspective {
+    background: linear-gradient(to right, #030, #444);
+    background: -moz-linear-gradient(left, #030, #444);
+    background: -ms-linear-gradient(left, #030, #444);
+    background: -o-linear-gradient(left, #030, #444);
+    background: -webkit-linear-gradient(left, #030, #444);
+}
+.environment .content .details .service-list .slot.down.active .perspective {
+    background: linear-gradient(to right, #300, #444);
+    background: -moz-linear-gradient(left, #300, #444);
+    background: -ms-linear-gradient(left, #300, #444);
+    background: -o-linear-gradient(left, #300, #444);
+    background: -webkit-linear-gradient(left, #300, #444);
+}
+.environment .content .details .service-list .slot.booting.up.active .perspective,
+.environment .content .details .service-list .slot.booting.down.active .perspective {
+    background: linear-gradient(to right, #320, #444);
+    background: -moz-linear-gradient(left, #320, #444);
+    background: -ms-linear-gradient(left, #320, #444);
+    background: -o-linear-gradient(left, #320, #444);
+    background: -webkit-linear-gradient(left, #320, #444);
+}
+.environment .content .details .service-list .slot.active .controls {
+    display: table-cell;
+}
+
+
+
+.environment .content form {
+    display: none;
+    padding-top: 8px;   /* Same as .environment .content .details .name */
+}
+.environment .content form input,
+.environment .content form select {
+    border: 2px solid black;   /* To avoid sizing if .error is added. */
+}
+.environment .content form input.error,
+.environment .content form select.error {
+    border-color: #f00;
+}
+.environment .content form input {
+    margin-top: 0.75em;
+}
+.environment .content form .colo-name-instructions {
+    font-size: smaller;
+    color: gray;
+    display: block;
+    margin-bottom: 2em;
+}
+.environment .content form select {
+    text-overflow: ellipsis;
+    text-shadow: rgba(102, 102, 102, 0.5) 0 -1px 0, rgba(255, 255, 255, 0.6) 0 1px 1px;
+
+    /* Pattern */
+    /* Add "white" at the end otherwise options in FF are black on black. */
+    background: repeating-linear-gradient(-45deg, gray, white, white, gray) white;
+    background: -moz-repeating-linear-gradient(top left -45deg, gray, white, white, gray) white;
+    background: -ms-repeating-linear-gradient(top left -45deg, gray, white, white, gray) white;
+    background: -o-repeating-linear-gradient(top left -45deg, gray, white, white, gray) white;
+    background: -webkit-repeating-linear-gradient(-45deg, gray, white, white, gray) white;
+}
+.environment .content form button {
+    float: left;
+    margin-right: 0.75em;
+}
+
+.environment .content form select[name="product_id"] {
+    max-width: 65%;
+    margin-right: 0.5em;
+}
+.environment .content form select[name="branch_id"] {
+    max-width: 35%;
+}
+/* Changes for when a product restriction is in effect. */
+.environment.restricted-product .content form select[name="product_id"] {
+    display: none;
+}
+.environment.restricted-product .content form select[name="branch_id"] {
+    max-width: 65%;
+}
+
+.environment .content form input {
+    width: 75%;
+}
+
+.environment .content form.global-edit-choices button {
+    display: block;
+    margin-top: 1em;
+    float: none;
+}
+.environment .content form.global-edit-choices button.promote,
+.environment .content form.global-edit-choices button.cancel {
+    margin-top: 2em;
+}
+.environment .content form.global-edit-choices button.promote,
+.environment .content form.global-edit-choices button.edit-rpms {
+    margin-left: 2em;
+}
+
+.environment.new .content .details,
+.environment.edit .content .details {
+    display: none;
+}
+.environment.new .content .details-editor {
+    display: block;
+}
+.environment.edit .content .global-details-editor {
+    display: block;
+}
+.environment.edit .content .global-details-editor table {
+    overflow: auto;
+    max-height: 9em;
+    display: block;
+    margin-top: 1em;
+    margin-bottom: 1.25em;
+}
+.environment.edit .content .global-details-editor table th,
+.environment.edit .content .global-details-editor table td {
+    padding: 0.15em 2em;
+    font-size: 15px;
+}
+.environment.edit .content .global-details-editor table th {
+    padding-bottom: 1em;
+}
+.environment.edit .content .global-details-editor table tr.changed td {
+    background-color: rgba(255, 255, 0, .6);
+}
+.environment.edit.promotable .content .global-details-editor {
+    display: none;
+}
+.environment.edit.promotable .content .global-edit-choices {
+    display: block;
+}
+.environment .content form input,
+.environment .content form select,
+.environment .content form button {
+    display: inline;
+}
+.environment .content form input {
+    display: block;
+    padding: 0.25em;
+}
+.environment.new .content .controls .light,
+.environment.new .content .controls .switch,
+.environment.new .content .controls .safety,
+.environment.edit .content .controls .light,
+.environment.edit .content .controls .switch,
+.environment.edit .content .controls .safety {
+    display: none;
+}
+
+.environment.off .content .details .name {
+    color: #555;
+}
+
+footer {
+    color: gray;
+    text-align: center;
+    padding: 1em 0;
+    font-size: 0.75em;
+    line-height: 0.75em;
+}
+
+
+
+/* Adjust fluid layout based on user's screen resolution.
+   Basically, on Macbook Pro, prevent scrollbar on service list.
+   Everywhere else, give .details and .display equal width (the default CSS styling). */
+@media (min-width: 1400px) and (max-width: 1500px) {
+    .left-col {
+        width: 70.6%;
+    }
+    .right-col {
+        width: 29.2%;
+    }
+}
+/* END - Adjust fluid layout based on user's screen resolution. */

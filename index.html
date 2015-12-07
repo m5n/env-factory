@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>TEF</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.ico" />
+    <link href="css/normalize-2.1.3.css" rel="stylesheet" type="text/css" />
+    <link href="css/jquery-ui-1.10.3.min.css" rel="stylesheet" type="text/css" />
+    <link href="css/tefweb.css" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body>
+    <noscript>
+      <p>
+        <strong>Your browser has scripting disabled!</strong> Enable scripting
+        to unlock the full power of this application.
+      </p>
+    </noscript>
+
+    <p id="outdated">
+      <strong>Your browser is outdated!</strong> Update your browser to the
+      latest version to ensure the best possible user experience.
+    </p>
+
+    <p id="init">Initializing...</p>
+
+    <header>
+      <div id="logo">
+        <span class="brand">TRANQUIL</span><span class="product">Environment
+          Factory</span>
+      </div>
+
+      <div id="session">
+        <div id="logout">
+          <span></span>
+          <button>Log Out</button>
+        </div>
+        <form id="login">
+          <label for="user">Username:</label>
+          <input id="user" name="user">
+          <label for="password">Password:</label>
+          <input type="password" id="password" name="password">
+          <p class="login-error">
+            Could not log in; check your username/password and try again
+          </p>
+          <p class="session-expired">
+            Your session expired; please log back in
+          </p>
+          <p class="custom"></p>
+          <button type="submit">Log In</button>
+        </form>
+      </div>
+
+      <div id="controls">
+        <input id="filterEnvironments" placeholder="Type to filter...">
+        <button id="newEnvironment" disabled="disabled">New Environment</button>
+        <span class="usage">Usage: <meter></meter></span>
+      </div>
+    </header>
+
+    <ul class="environment-list"></ul>
+
+    <footer>
+      Copyright &copy; <span>2013</span> Tranquil Corporation
+    </footer>
+
+    <script type="text/html" id="usage-meter">
+      <meter value="{value}" min="{min}" max="{max}" low="{low}" high="{high}"
+        title="Usage: {value} out of {max} environments">{value} out of {max}
+        environments</meter>
+    </script>
+    <script type="text/html" id="empty-usage-meter">
+       <meter title="Loading...">Loading...</meter>
+    </script>
+    <script type="text/html" id="select-option">
+      <option value="{value}">{name}</option>
+    </script>
+    <script type="text/html" id="anchor-link">
+      <a href="{href}" class="{classes}" target="_blank">{text}</a>
+    </script>
+    <script type="text/html" id="logout-error">
+      <li class="logout-error">
+        An unexpected error occured: {msg} (clicking the logout button again
+        may fix this)
+      </li>
+    </script>
+    <script type="text/html" id="unexpected-error">
+      <li class="unexpected-error">
+        An unexpected error occured: {msg} (reloading the page may fix this)
+      </li>
+    </script>
+    <script type="text/html" id="fetch-environments-error">
+      <li class="fetch-environments-error">
+        Could not load existing environments: {msg}
+        (reloading the page may fix this)
+      </li>
+    </script>
+    <script type="text/html" id="environment-entry">
+      <div class="wood">
+        <div class="handle left"></div>
+        <div class="handle right"></div>
+        <div class="content">
+          <div class="left-col">
+            <div class="controls">
+              <div class="light"></div>
+              <!-- TODO: remove title when switch is persisted on backend. -->
+              <div class="switch" title='Turn the UI on or off&mdash;the
+                  environment itself stays "on"'>
+                ON
+                <div class="hole">
+                  <div class="base"></div>
+                  <div class="tip"></div>
+                </div>
+                OFF
+              </div>
+              <button class="edit" disabled="disabled">Edit</button>
+              <div class="safety">
+                <button class="destroy" disabled="disabled">Destroy</button>
+                <div class="border">
+                  <div class="protection"></div>
+                </div>
+              </div>
+            </div>
+            <div class="details">
+              <p class="name">{colo_name}</p>
+              <ul class="service-list"></ul>
+            </div>
+            <form class="details-editor">
+              <select name="product_id">
+                <option value="">&mdash; Select Product &mdash;</option>
+              </select>
+              <select name="branch_id" disabled="disabled">
+                <option value="">&mdash; Select Branch &mdash;</option>
+                <option data-product-id="1" value="">
+                  &mdash; Select Triple Feature Branch &mdash;
+                </option>
+              </select>
+              <input name="colo_name" placeholder="Enter environment name...">
+              <p class="colo-name-instructions">
+                Use only letters, numbers, or underscores
+              </p>
+              <button type="submit">Create</button>
+              <button class="cancel">Cancel</button>
+            </form>
+            <form class="global-edit-choices">
+              <p class="name">Edit: {colo_name}</p>
+              <button class="promote">Promote {promotable_from_colo_name} to {colo_name}</button>
+              <button class="edit-rpms">Edit individual RPMs on {colo_name}</button>
+              <button class="cancel">Cancel</button>
+            </form>
+            <form class="global-details-editor">
+              <p class="name">Edit: {colo_name}</p>
+              <table>
+                <thead><th>Service</th><th>Current</th><th>Target</th></thead>
+                <tbody></tbody>
+              </table>
+              <button type="submit">Deploy</button>
+              <button class="cancel">Cancel</button>
+            </form>
+          </div>
+          <div class="right-col">
+            <div class="display off" data-boot-text="TEF v0.5"></div>
+          </div>
+        </div>
+      </div>
+    </script>
+    <script type="text/html" id="service-list-item">
+      <div class="perspective"></div>
+      <div class="front-panel">
+        <span class="light"></span>
+        <span class="text">{nickname}</span>
+        <!-- TODO: span class="controls">P S R</span -->
+      </div>
+    </script>
+    <script src="js/jquery-2.0.3.min.js"></script>
+    <script src="js/jquery-ui-1.10.3.min.js"></script>
+    <script src="js/underscore-1.5.2.min.js"></script>
+    <script src="js/backbone-1.0.0.min.js"></script>
+    <script src="js/ZeroClipboard-1.3.2.min.js"></script>
+    <script src="js/tefweb.js"></script>
+  </body>
+</html>
