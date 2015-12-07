@@ -145,7 +145,8 @@
         return msg;
     }
 
-    if (document.location.protocol === 'file:') {
+    if (document.location.protocol === 'file:' ||
+            document.location.host === 'm5n.github.io') {
         Backbone.sync = function (method, model, options) {
             var request,
                 response;
