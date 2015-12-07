@@ -1,0 +1,5 @@
+The jQuery UI css file was retrieved from:
+http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.min.css
+
+Ideally, images are needed too but were not installed yet.
+If installed, resizable() components would display an affordance.
